@@ -1,5 +1,6 @@
   
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import   "./App.css";
 import Header from "./Header";
@@ -36,9 +37,11 @@ import ContactList from "./contactList";
 
     return (
         <div>
+            <Router>
             <Header/>
             <AddContact addContactHandler={addContactHandler}/>
             <ContactList contacts={contacts} getContactId={removeContactHandler}/>
+            </Router>
         </div>
     )
     
