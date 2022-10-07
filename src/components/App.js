@@ -26,10 +26,10 @@ import ContactList from "./contactList";
         setContacts(newContactList);
       };
     
-      // useEffect(() => {
-      //   const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-      //   if (retriveContacts) setContacts(retriveContacts);
-      // }, []);
+       useEffect(() => {
+        const retriveContacts = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
+         if (retriveContacts) setContacts(retriveContacts);
+      }, []);
     
       useEffect(() => {
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(contacts));
@@ -39,8 +39,36 @@ import ContactList from "./contactList";
         <div>
             <Router>
             <Header/>
-            <AddContact addContactHandler={addContactHandler}/>
-            <ContactList contacts={contacts} getContactId={removeContactHandler}/>
+            <Switch>
+            
+
+            <Route path="/add" 
+            exact
+            render = {
+              (props)=> (
+                <AddContact 
+                {...props}
+                addContactHandler={addContactHandler}/>
+              )}/>
+              <Route path="/" 
+              exact 
+              render = {
+              (props)=> (
+                <ContactList 
+                {...props}
+                contacts={contacts} 
+                getContactId={removeContactHandler}/>
+                )}
+                />
+
+        
+            
+            
+            
+            </Switch>
+            
+            
+           
             </Router>
         </div>
     )
